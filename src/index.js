@@ -1,9 +1,9 @@
-import findPlaces from './find-places';
+import handleSearch from './search';
 
 async function main() {
-  const places = await findPlaces('palmerston');
-  places.forEach((e) => {
-    console.log(e.placeName);
+  const searchInput = document.querySelector('.form__text');
+  searchInput.addEventListener('input', () => {
+    handleSearch(searchInput.value);
   });
 }
 
