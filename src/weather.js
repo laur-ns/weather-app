@@ -1,10 +1,11 @@
 const temperatureUnits = 'celsius';
 
-const submitCoords = function submitCoordsToWeatherAPI(coords) {
-  const xCoords = coords.split(',')[0];
-  const yCoords = coords.split(',')[1];
-  console.log(xCoords);
-  console.log(yCoords);
+const submitWeatherCoords = function submitCoordsToWeatherAPI(coords) {
+  const lonCoords = coords.split(',')[0];
+  const latCoords = coords.split(',')[1];
+  console.log(coords);
+  console.log(lonCoords);
+  console.log(latCoords);
 };
 
-export default submitCoords;
+export default submitWeatherCoords;

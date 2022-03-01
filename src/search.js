@@ -1,6 +1,6 @@
 import displayPlaces from './display-places';
 import findPlaces from './find-places';
-import submitCoords from './weather';
+import submitWeatherCoords from './weather';
 
 let timeout = null;
 
@@ -31,7 +31,7 @@ export default function searchInit() {
       return;
     }
     const closestLocation = document.querySelector('.form__results > li');
-    submitCoords(closestLocation.getAttribute('id'));
+    submitWeatherCoords(closestLocation.getAttribute('id'));
     searchInput.value = closestLocation.textContent;
     resultsElement.innerHTML = '';
   });

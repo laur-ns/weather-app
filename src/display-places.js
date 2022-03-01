@@ -25,7 +25,7 @@ export default function displayPlaces(result) {
       }
       searchInput.value = r.placeName;
       resultsElement.innerHTML = '';
-      submitCoords(place.getAttribute('id'));
+      submitWeatherCoords(place.getAttribute('id'));
     });
 
     resultsElement.append(place);
