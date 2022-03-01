@@ -9,14 +9,14 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./src/display-results.js":
-/*!********************************!*\
-  !*** ./src/display-results.js ***!
-  \********************************/
+/***/ "./src/display-places.js":
+/*!*******************************!*\
+  !*** ./src/display-places.js ***!
+  \*******************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ displayResults)\n/* harmony export */ });\nfunction displayResults(result) {\n  if (!result.length > 0) {\n    return;\n  }\n\n  result.forEach(function (r) {\n    console.log(r.placeName);\n  });\n}\n\n//# sourceURL=webpack://weather-app/./src/display-results.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ displayPlaces)\n/* harmony export */ });\nfunction displayPlaces(result) {\n  if (!result.length > 0) {\n    return;\n  }\n\n  result.forEach(function (r) {\n    console.log(r.placeName);\n  });\n}\n\n//# sourceURL=webpack://weather-app/./src/display-places.js?");
 
 /***/ }),
 
@@ -38,7 +38,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _search__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./search */ \"./src/search.js\");\nfunction asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }\n\nfunction _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, \"next\", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, \"throw\", err); } _next(undefined); }); }; }\n\n\n\nfunction main() {\n  return _main.apply(this, arguments);\n}\n\nfunction _main() {\n  _main = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {\n    var searchInput;\n    return regeneratorRuntime.wrap(function _callee$(_context) {\n      while (1) {\n        switch (_context.prev = _context.next) {\n          case 0:\n            searchInput = document.querySelector('.form__text');\n            searchInput.addEventListener('input', function () {\n              (0,_search__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(searchInput.value);\n            });\n\n          case 2:\n          case \"end\":\n            return _context.stop();\n        }\n      }\n    }, _callee);\n  }));\n  return _main.apply(this, arguments);\n}\n\nmain();\n\n//# sourceURL=webpack://weather-app/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _search__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./search */ \"./src/search.js\");\n\n(0,_search__WEBPACK_IMPORTED_MODULE_0__[\"default\"])();\n\n//# sourceURL=webpack://weather-app/./src/index.js?");
 
 /***/ }),
 
@@ -49,7 +49,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _sea
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ handleSearch)\n/* harmony export */ });\n/* harmony import */ var _display_results__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./display-results */ \"./src/display-results.js\");\n/* harmony import */ var _find_places__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./find-places */ \"./src/find-places.js\");\n\n\nvar timeout = null;\nfunction handleSearch(search) {\n  if (search === '') {\n    return;\n  }\n\n  clearTimeout(timeout);\n  timeout = setTimeout(function () {\n    var response = (0,_find_places__WEBPACK_IMPORTED_MODULE_1__[\"default\"])(search);\n    response.then(_display_results__WEBPACK_IMPORTED_MODULE_0__[\"default\"]);\n  }, 500);\n}\n\n//# sourceURL=webpack://weather-app/./src/search.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ searchInit),\n/* harmony export */   \"handleSearch\": () => (/* binding */ handleSearch)\n/* harmony export */ });\n/* harmony import */ var _display_places__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./display-places */ \"./src/display-places.js\");\n/* harmony import */ var _find_places__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./find-places */ \"./src/find-places.js\");\n\n\nvar timeout = null;\n\nvar handleSearch = function searchAfterTimeoutRunsOut(search) {\n  /* Will keep restarting search after a delay\n  Takes list of places from findPlaces,\n  Then passes that list as argument to displayPlaces */\n  if (search === '') {\n    return;\n  }\n\n  clearTimeout(timeout);\n  timeout = setTimeout(function () {\n    var response = (0,_find_places__WEBPACK_IMPORTED_MODULE_1__[\"default\"])(search);\n    response.then(_display_places__WEBPACK_IMPORTED_MODULE_0__[\"default\"])[\"catch\"](function (e) {\n      return console.log(e);\n    });\n  }, 500);\n};\n\nfunction searchInit() {\n  var searchInput = document.querySelector('.form__text');\n  var searchForm = document.querySelector('.form');\n  searchInput.addEventListener('input', function () {\n    handleSearch(searchInput.value);\n  });\n  searchForm.addEventListener('submit', function (e) {\n    e.preventDefault();\n  });\n}\n\n\n//# sourceURL=webpack://weather-app/./src/search.js?");
 
 /***/ }),
 

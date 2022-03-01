@@ -1,4 +1,4 @@
-export default function displayResults(result) {
+export default function displayPlaces(result) {
   if (!result.length > 0) {
     return;
   }

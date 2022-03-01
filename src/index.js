@@ -1,10 +1,3 @@
-import handleSearch from './search';
+import searchInit from './search';
 
-async function main() {
-  const searchInput = document.querySelector('.form__text');
-  searchInput.addEventListener('input', () => {
-    handleSearch(searchInput.value);
-  });
-}
-
-main();
+searchInit();

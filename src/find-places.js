@@ -1,6 +1,6 @@
 async function findPlaces(searchText) {
-  /* Will search up to 5 places using mapbox geocoding api.
-  Searches countries, cities, regions, and postcodes.
+  /* Will find up to 5 places using mapbox geocoding api.
+  Fins countries, cities, regions, and postcodes.
   The function returns the place name, and the coordinates
   for each place. */
   try {
