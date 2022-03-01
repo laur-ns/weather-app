@@ -1,5 +1,6 @@
 import displayPlaces from './display-places';
 import findPlaces from './find-places';
+import submitCoords from './weather';
 
 let timeout = null;
 
@@ -14,17 +15,25 @@ const handleSearch = function searchAfterTimeoutRunsOut(search) {
   timeout = setTimeout(() => {
     const response = findPlaces(search);
     response.then(displayPlaces).catch((e) => console.log(e));
-  }, 500);
+  }, 300);
 };
 
 export default function searchInit() {
   const searchInput = document.querySelector('.form__search');
   const searchForm = document.querySelector('.form');
+  const resultsElement = document.querySelector('.form__results');
   searchInput.addEventListener('input', () => {
     handleSearch(searchInput.value);
   });
   searchForm.addEventListener('submit', (e) => {
     e.preventDefault();
+    if (resultsElement.innerHTML === '') {
+      return;
+    }
+    const closestLocation = document.querySelector('.form__results > li');
+    submitCoords(closestLocation.getAttribute('id'));
+    searchInput.value = closestLocation.textContent;
+    resultsElement.innerHTML = '';
   });
 }
 
