@@ -18,7 +18,7 @@ const handleSearch = function searchAfterTimeoutRunsOut(search) {
 };
 
 export default function searchInit() {
-  const searchInput = document.querySelector('.form__text');
+  const searchInput = document.querySelector('.form__search');
   const searchForm = document.querySelector('.form');
   searchInput.addEventListener('input', () => {
     handleSearch(searchInput.value);

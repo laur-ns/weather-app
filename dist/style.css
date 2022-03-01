@@ -53,18 +53,27 @@ body {
 
 .wrapper {
   min-height: 100%;
-  width: clamp(350px, 100%, 1300px);
+  width: clamp(350px, 100%, 1250px);
   display: grid;
   gap: var(--main-grap);
   grid-template: 
           'search' max-content
           'main'   1fr
-          'days'   1fr / 1fr;
+          'days'   max-content / 1fr;
 
 }
 
 .form {
+  position: relative;
   grid-area: 'search';
+}
+
+.form__logo {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.6rem;
+  height: 3rem;
+  width: 3rem;
 }
 
 .form__search {
@@ -73,26 +82,24 @@ body {
   font-size: 1.5rem;
   font-family: Jost, sans-serif;
   font-weight: 500;
-  padding: 0.75rem;
-  padding-left: 4rem;
+  padding: 1rem 0.75rem 0.75rem 4rem;
 }
 
-.main {
+.main-wrapper {
   grid-area: 'main';
   border: 2px solid red;
   display: flex;
-  justify-content: space-between;
   gap: var(--main-grap);
   flex-flow: row wrap;
 }
 
-.main__today {
+.today {
   border: 2px solid green;
   flex: 1 1 400px;
   min-width: 400px;
 }
 
-.main__selected-day {
+.selected-day {
   border: 2px solid pink;
   flex: 1 1 400px;
   min-width: 400px;
@@ -100,16 +107,20 @@ body {
 
 .days {
   grid-area: 'days';
-  border: 2px solid blue;
   display: flex;
-  justify-content: space-between;
-  flex-flow: row wrap;
+  flex-flow: row nowrap;
   gap: 1.6rem;
+  overflow-x: auto;
+  padding-bottom: 1rem;
+  margin-bottom: -1rem;
 }
 
 .days > * {
-  flex: 1 1 0;
+  flex: 1 0 0;
   border-radius: 50px;
+  height: 22rem;
+  max-width: 150px;
+  min-width: max-content;
   background-color: rgba(0, 0, 0, 0.555);
   border: 1px solid brown;
 }
