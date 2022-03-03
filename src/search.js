@@ -22,6 +22,9 @@ export default function searchInit() {
   const searchInput = document.querySelector('.form__search');
   const searchForm = document.querySelector('.form');
   const resultsElement = document.querySelector('.form__results');
+  document.addEventListener('click', () => {
+    resultsElement.innerHTML = '';
+  });
   searchInput.addEventListener('input', () => {
     handleSearch(searchInput.value);
   });

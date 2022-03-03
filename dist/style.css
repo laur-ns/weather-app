@@ -95,18 +95,19 @@ body {
 
 .form__results {
   position: absolute;
-  background-color: rgba(255, 255, 255, 0.930);
+  background-color: rgb(43, 43, 43);
   width: 100%;
-  top: 0.2rem;
+  top: 0.4rem;
   border-radius: 0.5rem;
 }
 
 .form__results > *:nth-child(even) {
-  background-color: rgba(228, 228, 228, 0.93);
+  background-color: rgba(27, 27, 27, 0.93);
 }
 
 .form__results > * {
-  color: var(--black);
+  color: white;
+  list-style-type: none;
   font-family: Jost;
   font-size: 1.12rem;
   font-weight: 500;
@@ -115,11 +116,11 @@ body {
 }
 
 .form__results > *:hover {
-  background-color:rgba(209, 209, 209, 0.93);
+  background-color:rgba(20, 20, 20, 0.93);
 }
 
 .form__results > *:focus {  
-  background-color:rgba(209, 209, 209, 0.93);
+  background-color:rgba(68, 68, 68, 0.93);
 }
 
 .wrapper--main {

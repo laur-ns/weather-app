@@ -1,4 +1,4 @@
-import submitCoords from './weather';
+import submitWeatherCoords from './weather';
 
 const searchInput = document.querySelector('.form__search');
 const resultsElement = document.querySelector('.form__results');
@@ -17,7 +17,7 @@ export default function displayPlaces(result) {
     place.addEventListener('click', () => {
       searchInput.value = r.placeName;
       resultsElement.innerHTML = '';
-      submitCoords(place.getAttribute('id').split(','));
+      submitWeatherCoords(place.getAttribute('id'));
     });
     place.addEventListener('keydown', (e) => {
       if (e.keyCode !== 13) {
