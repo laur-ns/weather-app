@@ -12,7 +12,7 @@
 </head>
 
 <body>
-  <div class='wrapper--search'>
+  <div class='wrapper--page'>
     <form action='' class='form'>
       <img src='./assets/magnifying-glass.png' alt='search' class='form__logo'>
       <input type='text' class='form__search' placeholder='Search location'>
@@ -23,7 +23,19 @@
     </form>
     <div class='wrapper--main'>
       <div class='today'>
-        <div class='today__main-img'></div>
+        <img class='today__main-img' src='./assets/SVG/main-rain.svg' alt='rain'>
+        <div class='today__temperature'>
+          <h1 class='today__temperature-value'>17°</h1>
+          <div class='today__units'>
+            <h5 class='today__c active'>C</h5>
+            <h5 class='today__f'>F</h5>
+          </div>
+        </div>
+        <div class='today__info'>
+          <p class='today__date'>21st August</p>
+          <br>
+          <h5 class='today__location'>Wellington, New Zealand</h5>
+        </div>
       </div>
       <div class='selected-day'>
       </div>

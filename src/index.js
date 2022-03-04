@@ -14,5 +14,5 @@ const getLocation = function promptUserForLocation() {
   );
 };
 
-searchInit();
-getLocation();
+// searchInit();
+// getLocation();

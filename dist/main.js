@@ -38,7 +38,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _search__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./search */ \"./src/search.js\");\n/* harmony import */ var _weather__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./weather */ \"./src/weather.js\");\n\n\n\nvar getLocation = function promptUserForLocation() {\n  navigator.geolocation.getCurrentPosition(function (position) {\n    var userCoords = \"\".concat(position.coords.longitude, \",\").concat(position.coords.latitude);\n    (0,_weather__WEBPACK_IMPORTED_MODULE_1__[\"default\"])(userCoords);\n  }, function () {\n    // error callback\n    (0,_weather__WEBPACK_IMPORTED_MODULE_1__[\"default\"])('174.78333,-36.85');\n  });\n};\n\n(0,_search__WEBPACK_IMPORTED_MODULE_0__[\"default\"])();\ngetLocation();\n\n//# sourceURL=webpack://weather-app/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _search__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./search */ \"./src/search.js\");\n/* harmony import */ var _weather__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./weather */ \"./src/weather.js\");\n\n\n\nvar getLocation = function promptUserForLocation() {\n  navigator.geolocation.getCurrentPosition(function (position) {\n    var userCoords = \"\".concat(position.coords.longitude, \",\").concat(position.coords.latitude);\n    (0,_weather__WEBPACK_IMPORTED_MODULE_1__[\"default\"])(userCoords);\n  }, function () {\n    // error callback\n    (0,_weather__WEBPACK_IMPORTED_MODULE_1__[\"default\"])('174.78333,-36.85');\n  });\n}; // searchInit();\n// getLocation();\n\n//# sourceURL=webpack://weather-app/./src/index.js?");
 
 /***/ }),
 
@@ -53,6 +53,17 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 
 /***/ }),
 
+/***/ "./src/weather-api-key.js":
+/*!********************************!*\
+  !*** ./src/weather-api-key.js ***!
+  \********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ getWeatherApiKey)\n/* harmony export */ });\nfunction getWeatherApiKey() {\n  return '11ea4e799d422a52dbd686220ca6b1e9';\n}\n\n//# sourceURL=webpack://weather-app/./src/weather-api-key.js?");
+
+/***/ }),
+
 /***/ "./src/weather.js":
 /*!************************!*\
   !*** ./src/weather.js ***!
@@ -60,7 +71,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nvar temperatureUnits = 'celsius';\n\nvar submitWeatherCoords = function submitCoordsToWeatherAPI(coords) {\n  var lonCoords = coords.split(',')[0];\n  var latCoords = coords.split(',')[1];\n  console.log(lonCoords);\n  console.log(latCoords);\n};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (submitWeatherCoords);\n\n//# sourceURL=webpack://weather-app/./src/weather.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _weather_api_key__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./weather-api-key */ \"./src/weather-api-key.js\");\nfunction asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }\n\nfunction _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, \"next\", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, \"throw\", err); } _next(undefined); }); }; }\n\n\nvar temperatureUnits = 'celsius';\nvar key = (0,_weather_api_key__WEBPACK_IMPORTED_MODULE_0__[\"default\"])();\n\nfunction getWeatherData(_x, _x2) {\n  return _getWeatherData.apply(this, arguments);\n}\n\nfunction _getWeatherData() {\n  _getWeatherData = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(lon, lat) {\n    var response, weatherData;\n    return regeneratorRuntime.wrap(function _callee$(_context) {\n      while (1) {\n        switch (_context.prev = _context.next) {\n          case 0:\n            _context.next = 2;\n            return fetch(\"https://api.openweathermap.org/data/2.5/onecall?lat=\".concat(lat, \"&lon=\").concat(lon, \"&exclude=minutely,hourly,alerts&appid=\").concat(key));\n\n          case 2:\n            response = _context.sent;\n            _context.next = 5;\n            return response.json();\n\n          case 5:\n            weatherData = _context.sent;\n            console.log(weatherData);\n\n          case 7:\n          case \"end\":\n            return _context.stop();\n        }\n      }\n    }, _callee);\n  }));\n  return _getWeatherData.apply(this, arguments);\n}\n\nvar submitWeatherCoords = function submitCoordsToWeatherAPI(coords) {\n  var lonCoords = coords.split(',')[0];\n  var latCoords = coords.split(',')[1];\n  console.log(lonCoords);\n  console.log(latCoords);\n  getWeatherData(lonCoords, latCoords);\n};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (submitWeatherCoords);\n\n//# sourceURL=webpack://weather-app/./src/weather.js?");
 
 /***/ }),
 

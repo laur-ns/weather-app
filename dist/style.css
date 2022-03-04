@@ -1,7 +1,33 @@
 :root {
   /* main background-color transparency is 0.930 */
-  --main-grap: 2rem;
+  --main-gap: 2rem;
   --black: rgb(12, 12, 12);
+  --background: rgba(0, 0, 0, 0.849);
+  --sky-blue: rgb(139, 184, 226);
+}
+
+/*
+fonts used:
+main number: bebas neue bold 182pt
+
+1st august jost extralight 24pt
+wellington jost regular 28pt
+
+tue  |  21 aug jost regular 28pt
+12km/h jost extralight 24pt
+
+Tue jost semibold 21pt
+21 aug jost regular 19pt
+
+Clouds stratos semibold 18pt
+
+17 c jost bold 31pt
+10 c jost light 31pt
+*/
+
+@font-face {
+  font-family: Stratos;
+  src: url('./assets/fonts/Stratos-600.otf');
 }
 
 @font-face {
@@ -34,6 +60,11 @@
   font-weight: 700;
 }
 
+@font-face {
+  font-family: Bebas-Neue-Bold;
+  src: url('./assets/fonts/BebasNeue-bold.otf');
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -50,21 +81,22 @@ body {
   display: grid;
   place-items: center;
   min-height: 100vh;
-  padding: 5%;
+  padding: 0 5%;
 }
 
-.wrapper--search {
+.wrapper--page {
   min-height: 100%;
   width: clamp(350px, 100%, 1250px);
   display: grid;
-  gap: var(--main-grap);
+  gap: var(--main-gap);
   grid-template: 
           'search' max-content
-          'main'   1fr
+          'main'   max-content
           'days'   max-content / 1fr;
 }
 
 .form {
+  margin-top: 3rem;
   position: relative;
   grid-area: 'search';
 }
@@ -124,20 +156,105 @@ body {
 }
 
 .wrapper--main {
+  --main-min-height: 35vh;
   grid-area: 'main';
-  border: 2px solid red;
   display: flex;
-  gap: var(--main-grap);
+  gap: var(--main-gap);
   flex-flow: row wrap;
 }
 
+.today, .selected-day {
+  border-radius: 0.5rem;
+}
+
 .today {
-  border: 2px solid green;
+  min-height: var(--main-min-height);
+  background-color: var(--background);
   flex: 1 1 400px;
   min-width: 400px;
+  display: grid;
+  grid-template: 1fr 0.7fr / 1.25fr 1fr;
+  padding: 1rem;
+  align-items: center;
+  color: white;
+}
+
+.today__main-img {
+  width: 100%;
+  grid-area: 1 / 1 / 3 / 2;
+}
+
+.today__temperature {
+  display: flex;
+  gap: 2rem;
+  align-self: end;
+  justify-content: center;
+}
+
+.today__temperature-value {
+  line-height: 0.95;
+  color: var(--sky-blue);
+  font-size: clamp(7rem, 20vw, 11rem);
+  margin-bottom: -0.22em;
+  font-family: Bebas-Neue-Bold;
+}
+
+.today__units {
+  font-family: Stratos;
+  font-weight: 700;
+  font-size: 3rem;
+  text-align: center;
+  width: 100%;
+  display: grid;
+  place-items: center;
+  grid-template: 1fr 1fr / 1fr;
+}
+
+.today__units > * {
+  height: 100%;
+  padding: 0 1rem;
+  display: grid;
+  place-items: center;
+  padding-top: 0.5rem;
+  margin-top: -0.5rem;
+}
+
+.today__units .active {
+  background-color: white;
+  color: var(--sky-blue);
+  cursor: default;
+}
+
+.today__units > *:not(.active):hover {
+  transform: scale(1.03);
+}
+
+.today__units > *:not(.active) {
+  cursor: pointer;
+  border-bottom: 0.3rem solid gray;
+  border-bottom-left-radius: 0.3rem;
+  border-bottom-right-radius: 0.3rem;
+}
+
+.today__info {
+  text-align: end;
+  line-height: 1;
+}
+
+.today__date {
+  font-family: Jost;
+  font-weight: 300;
+  font-size: 1.3rem;
+}
+
+.today__location {
+  font-family: Jost;
+  font-weight: 500;
+  font-size: 1.5rem;
 }
 
 .selected-day {
+  min-height: var(--main-min-height);
   border: 2px solid pink;
   flex: 1 1 400px;
   min-width: 400px;
@@ -159,6 +276,7 @@ body {
   height: 22rem;
   max-width: 150px;
   min-width: max-content;
-  background-color: rgba(0, 0, 0, 0.555);
+  background-color: var(--background);
   border: 1px solid brown;
 }
+
