@@ -1,3 +1,20 @@
+import { getMapApiKey } from './api-keys';
+
+const key = getMapApiKey();
+
+async function getPlaceFromCoords(coords) {
+  try {
+    const response = await fetch(
+      `https://api.mapbox.com/geocoding/v5/mapbox.places/${coords}.json?types=place&access_token=${key}`,
+      { mode: 'cors' }
+    );
+    const responseObject = await response.json();
+    return responseObject.features[0].place_name;
+  } catch (e) {
+    throw new Error(e);
+  }
+}
+
 async function findPlaces(searchText) {
   /* Will find up to 5 places using mapbox geocoding api.
   Fins countries, cities, regions, and postcodes.
@@ -5,7 +22,7 @@ async function findPlaces(searchText) {
   for each place. */
   try {
     const response = await fetch(
-      `https://api.mapbox.com/geocoding/v5/mapbox.places/${searchText}.json?limit=5&autocomplete=true&types=country,place,address,region,postcode&access_token=pk.eyJ1IjoibGF1ci1ucyIsImEiOiJja3p6M3V2cjUwNmcyM2JtbHQydzA3NzdoIn0.qAES-URoq1Fe63KU3eCMmQ`,
+      `https://api.mapbox.com/geocoding/v5/mapbox.places/${searchText}.json?limit=5&autocomplete=true&types=country,place,address,region,postcode&access_token=${key}`,
       { mode: 'cors' }
     );
     const weatherData = await response.json();
@@ -23,3 +40,4 @@ async function findPlaces(searchText) {
 }
 
 export default findPlaces;
+export { getPlaceFromCoords };

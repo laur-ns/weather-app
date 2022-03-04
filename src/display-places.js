@@ -1,3 +1,4 @@
+import { setCurrentLocation } from './location';
 import submitWeatherCoords from './weather';
 
 const searchInput = document.querySelector('.form__search');
@@ -18,6 +19,7 @@ export default function displayPlaces(result) {
       searchInput.value = r.placeName;
       resultsElement.innerHTML = '';
       submitWeatherCoords(place.getAttribute('id'));
+      setCurrentLocation(r.placeName);
     });
     place.addEventListener('keydown', (e) => {
       if (e.keyCode !== 13) {
@@ -26,6 +28,7 @@ export default function displayPlaces(result) {
       searchInput.value = r.placeName;
       resultsElement.innerHTML = '';
       submitWeatherCoords(place.getAttribute('id'));
+      setCurrentLocation(r.placeName);
     });
 
     resultsElement.append(place);
