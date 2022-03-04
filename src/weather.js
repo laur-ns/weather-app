@@ -2,8 +2,9 @@ import { add, format } from 'date-fns';
 import { getWeatherApiKey } from './api-keys';
 import getCurrentLocation from './location';
 
-const temperatureUnit = 'celsius';
 const key = getWeatherApiKey();
+let activeForecast = 0;
+let temperatureUnit = 'C';
 let weatherData;
 
 const mainWeatherIcons = {
@@ -27,7 +28,7 @@ const forecastWeatherIcons = {
 };
 
 const convertKelvinToCurrentUnit = (kTemp) => {
-  if (temperatureUnit === 'celsius') {
+  if (temperatureUnit === 'C') {
     return Math.round(kTemp - 273.25);
   }
   // return fahrenheit
@@ -35,10 +36,17 @@ const convertKelvinToCurrentUnit = (kTemp) => {
 };
 
 const getCurrentUnit = () => {
-  if (temperatureUnit === 'celsius') {
+  if (temperatureUnit === 'C') {
     return 'C';
   }
   return 'F';
+};
+
+const setCurrentUnit = (u) => {
+  if (u !== 'C' && u !== 'F') {
+    throw new Error('something went wrong...');
+  }
+  temperatureUnit = u;
 };
 
 const appendMainCurrent = function displayWeatherDataForMainCurrent(data) {
@@ -76,8 +84,8 @@ const appendMainDetails = (data, index) => {
     `${convertKelvinToCurrentUnit(
       dayInfo.feels_like.day
     )} °${getCurrentUnit()}`,
-    `${dayInfo.humidity}%`,
-    `${dayInfo.pop * 100}%`,
+    `${Math.round(dayInfo.humidity)}%`,
+    `${Math.round(dayInfo.pop * 100)}%`,
   ];
 
   const detailsElements = document.querySelectorAll('.selected-day__value');
@@ -91,7 +99,6 @@ const appendMainDetails = (data, index) => {
 const appendWeekForecasts = (forecasts) => {
   const currentDate = new Date();
   const forecastElements = document.querySelectorAll('.day');
-  console.log(forecasts);
   let i = 0;
   forecastElements.forEach((e) => {
     const elementDate = add(currentDate, { days: i });
@@ -118,12 +125,6 @@ const appendWeekForecasts = (forecasts) => {
   });
 };
 
-const displayWeatherData = (data) => {
-  appendMainCurrent(data);
-  appendMainDetails(data, 0);
-  appendWeekForecasts(data.daily);
-};
-
 async function getWeatherData(lon, lat) {
   const response = await fetch(
     `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly,alerts&appid=${key}`
@@ -132,12 +133,72 @@ async function getWeatherData(lon, lat) {
   return weatherData;
 }
 
-const submitWeatherCoords = function submitCoordsToWeatherAPI(coords) {
+const changeActiveDay = (e) => {
+  const currentActiveDay = document.querySelector('.day--active');
+  const dayNumber = Number(e.classList[1].split('--')[1]);
+  activeForecast = dayNumber;
+  appendMainDetails(weatherData, dayNumber);
+  currentActiveDay.classList.toggle('day--active');
+  e.classList.toggle('day--active');
+};
+
+const displayWeatherData = (data) => {
+  appendMainCurrent(data);
+  appendMainDetails(data, activeForecast);
+  appendWeekForecasts(data.daily);
+};
+
+const toggleUnits = () => {
+  if (getCurrentUnit() === 'C') {
+    setCurrentUnit('F');
+    displayWeatherData(weatherData);
+  } else {
+    setCurrentUnit('C');
+    displayWeatherData(weatherData);
+  }
+};
+
+const weatherInit = function initializeDocumentEventListeners() {
+  const tempCToggle = document.querySelector('.today__c');
+  const tempFToggle = document.querySelector('.today__f');
+  const days = document.querySelectorAll('.day');
+
+  tempCToggle.addEventListener('click', (e) => {
+    if (tempCToggle.classList.contains('active')) {
+      return;
+    }
+    toggleUnits(e);
+    tempCToggle.classList.toggle('active');
+    tempFToggle.classList.toggle('active');
+  });
+  tempFToggle.addEventListener('click', (e) => {
+    if (tempFToggle.classList.contains('active')) {
+      return;
+    }
+    toggleUnits(e);
+    tempCToggle.classList.toggle('active');
+    tempFToggle.classList.toggle('active');
+  });
+  days.forEach((e) => {
+    e.addEventListener('click', () => {
+      if (e.classList.contains('day--active')) {
+        return;
+      }
+      changeActiveDay(e);
+    });
+  });
+};
+
+const submitWeatherCoords = async function submitCoordsToWeatherAPI(coords) {
   const lonCoords = coords.split(',')[0];
   const latCoords = coords.split(',')[1];
-  getWeatherData(lonCoords, latCoords)
+  await getWeatherData(lonCoords, latCoords)
     .then(displayWeatherData)
     .catch((e) => console.log(e));
+  const currentDay = document.querySelector('.day');
+  activeForecast = 0;
+  changeActiveDay(currentDay);
 };
 
 export default submitWeatherCoords;
+export { weatherInit };

@@ -1,7 +1,7 @@
 import { getPlaceFromCoords } from './find-places';
 import { getPosition, setCurrentLocation } from './location';
 import searchInit from './search';
-import submitWeatherCoords from './weather';
+import submitWeatherCoords, { weatherInit } from './weather';
 
 const submitInitLocation = async function promptUserForLocation() {
   // submits and displays weather data using either user's location,
@@ -20,4 +20,5 @@ const submitInitLocation = async function promptUserForLocation() {
 };
 
 searchInit();
+weatherInit();
 submitInitLocation();

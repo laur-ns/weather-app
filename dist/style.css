@@ -2,7 +2,7 @@
   /* main background-color transparency is 0.930 */
   --main-gap: 2rem;
   --black: rgb(12, 12, 12);
-  --background: rgba(0, 0, 0, 0.849);
+  --background: rgba(7, 7, 7, 0.849);
   --sky-blue: #48e0ff;
   --dark-pink: #b348ce;
 }
@@ -152,8 +152,8 @@ body {
 
 .today {
   min-height: var(--main-min-height);
-  flex: 1 1 400px;
-  min-width: 400px;
+  flex: 1 1 300px;
+  min-width: 300px;
   display: grid;
   grid-template: 1fr 0.7fr / 1.25fr 1fr;
   padding: 1rem;
@@ -194,6 +194,7 @@ body {
 
 .today__units > * {
   height: 100%;
+  width: 100%;
   padding: 0 1rem;
   display: grid;
   place-items: center;
@@ -238,11 +239,11 @@ body {
 .selected-day {
   min-height: var(--main-min-height);
   color: white;
-  flex: 1 1 400px;
-  min-width: 400px;
+  flex: 1 1 300px;
+  min-width: 300px;
   padding: 1rem 1.5rem;
   display: grid;
-  place-content: center;
+  place-items: center;
 }
 
 .selected-day__date {
@@ -253,8 +254,10 @@ body {
 
 .selected-day__info {
   display: grid; 
-  grid-template: 1fr 1fr / 1fr 1fr;
-  gap: 2rem;
+  place-items: left;
+  width: 100%;
+  grid-template: 1fr / repeat(auto-fit, minmax(160px, 1fr));
+  gap: 3rem;
   margin-top: 1.5rem;
 }
 
