@@ -16,7 +16,7 @@
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"getWeatherApiKey\": () => (/* binding */ getWeatherApiKey),\n/* harmony export */   \"getMapApiKey\": () => (/* binding */ getMapApiKey)\n/* harmony export */ });\nfunction getWeatherApiKey() {\n  return '11ea4e799d422a52dbd686220ca6b1e9';\n}\n\nfunction getMapApiKey() {\n  return 'pk.eyJ1IjoibGF1ci1ucyIsImEiOiJja3p6M3V2cjUwNmcyM2JtbHQydzA3NzdoIn0.qAES-URoq1Fe63KU3eCMmQ';\n}\n\n\n\n//# sourceURL=webpack://weather-app/./src/api-keys.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"getWeatherApiKey\": () => (/* binding */ getWeatherApiKey),\n/* harmony export */   \"getMapApiKey\": () => (/* binding */ getMapApiKey)\n/* harmony export */ });\nfunction getWeatherApiKey() {\n  return 'c9deb104e383db195dcd33545e5a602d';\n}\n\nfunction getMapApiKey() {\n  return 'pk.eyJ1IjoibGF1ci1ucyIsImEiOiJjbDBkMG9scTIwNGhlM2RwZnNpeGxucDg0In0.NXQTrAydm598tU-4irOriQ';\n}\n\n\n\n//# sourceURL=webpack://weather-app/./src/api-keys.js?");
 
 /***/ }),
 
