@@ -3,20 +3,9 @@
   --main-gap: 2rem;
   --black: rgb(12, 12, 12);
   --background: rgba(0, 0, 0, 0.849);
-  --sky-blue: rgb(139, 184, 226);
+  --sky-blue: #48e0ff;
+  --dark-pink: #b348ce;
 }
-
-/*
-fonts used:
-
-Tue jost semibold 21pt
-21 aug jost regular 19pt
-
-Clouds stratos semibold 18pt
-
-17 c jost bold 31pt
-10 c jost light 31pt
-*/
 
 @font-face {
   font-family: Stratos;
@@ -252,6 +241,8 @@ body {
   flex: 1 1 400px;
   min-width: 400px;
   padding: 1rem 1.5rem;
+  display: grid;
+  place-content: center;
 }
 
 .selected-day__date {
@@ -283,7 +274,7 @@ body {
 .selected-day__title {
   font-family: Jost, sans-serif;
   font-size: 1.25rem;
-  color: rgb(255, 154, 196);
+  color: rgb(240, 146, 201);
 }
 
 .selected-day__value {
@@ -301,6 +292,7 @@ body {
   overflow-x: auto;
   padding-bottom: 1rem;
   margin-bottom: -1rem;
+  color: white;
 }
 
 .wrapper--days > * {
@@ -310,6 +302,55 @@ body {
   max-width: 150px;
   min-width: max-content;
   background-color: var(--background);
-  border: 1px solid brown;
 }
 
+.day {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  font-family: jost, sans-serif;
+  gap: 0.5rem;
+  padding: 0.4rem;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.day:not(.day--active):hover {
+  background-color: rgb(24, 24, 24);
+}
+
+.day--active {
+  background: linear-gradient(180deg, var(--sky-blue), var(--dark-pink));
+}
+
+.day__week {
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+
+.day__date {
+  font-size: 1.1rem;
+  margin-top: -0.6rem;
+}
+
+.day__weather {
+  font-family: Stratos, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 1.05rem;
+  margin-top: 1rem;
+}
+
+.day__icon {
+  height: 4.35rem;
+}
+
+.day__max-temp {
+  font-weight: 800;
+  font-size: 2.1rem;
+  margin-bottom: -0.6rem;
+}
+
+.day__min-temp {
+  font-weight: 300;
+  font-size: 2.1rem;
+}
