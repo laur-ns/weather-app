@@ -4,6 +4,4 @@ Utilizes [One Call API](https://openweathermap.org/api/one-call-api) from open w
 
 ## [Live Demo](https://laur-ns.github.io/weather-app/dist)
 
-#
-
 ![Demo gif](https://i.imgur.com/hWgsNKQ.gif)
